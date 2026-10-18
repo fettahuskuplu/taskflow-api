@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Backend API altyapısının kurulması",
+    "description": "Node.js ve Express kullanılarak temel sunucu ve klasör yapısının oluşturulması.",
+    "status": "completed",
+    "priority": "high",
+    "assignee": "musa",
+    "createdAt": "2026-10-15T09:30:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "Görev CRUD işlemlerinin yazılması",
+    "description": "Görev ekleme, listeleme, detay görüntüleme, güncelleme ve silme uçlarının geliştirilmesi.",
+    "status": "completed",
+    "priority": "high",
+    "assignee": "ahmet",
+    "createdAt": "2026-10-16T11:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Logger middleware entegrasyonu",
+    "description": "Sunucuya gelen tüm API isteklerinin metod, adres ve tarih bilgisiyle kayıt altına alınması.",
+    "status": "in-progress",
+    "priority": "medium",
+    "assignee": "musa",
+    "createdAt": "2026-10-17T14:20:00.000Z"
+  },
+  {
+    "id": 4,
+    "title": "Veri doğrulama (Validation) kontrolleri",
+    "description": "Yeni görev eklerken eksik veya hatalı veri gönderildiğinde 400 Bad Request döndürülmesi.",
+    "status": "pending",
+    "priority": "medium",
+    "assignee": "zeynep",
+    "createdAt": "2026-10-17T16:45:00.000Z"
+  },
+  {
+    "id": 5,
+    "title": "Postman testlerinin yapılması ve dokümantasyon",
+    "description": "Backend uç noktalarının Postman ile test edilip ekran görüntülerinin README dosyasına eklenmesi.",
+    "status": "pending",
+    "priority": "low",
+    "assignee": "can",
+    "createdAt": "2026-10-18T08:00:00.000Z"
+  }
+]
