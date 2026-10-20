@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('./middlewares/logger');
+const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +18,9 @@ app.get('/', (req, res) => {
     message: 'TaskFlow API sunucusu çalışıyor.'
   });
 });
+
+// Görev yönetim rotaları
+app.use('/tasks', taskRoutes);
 
 // Tanımsız bir adrese istek atıldığında dönecek 404 yanıtı
 app.use((req, res) => {
