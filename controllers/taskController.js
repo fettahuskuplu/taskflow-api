@@ -14,14 +14,84 @@ const writeTasks = (tasks) => {
   fs.writeFileSync(tasksFilePath, JSON.stringify(tasks, null, 2), 'utf8');
 };
 
-// 1. Tüm görevleri listele (GET /tasks)
+// 1. Tüm görevleri listele (Filtreleme, Sıralama ve Sayfalama destekli)
 const getAllTasks = (req, res) => {
-  const tasks = readTasks();
+  let tasks = readTasks();
+  const { status, priority, sort, page, limit } = req.query;
+
+  // Duruma göre filtreleme (?status=completed)
+  if (status) {
+    tasks = tasks.filter((item) => item.status === status);
+  }
+
+  // Önceliğe göre filtreleme (?priority=high)
+  if (priority) {
+    tasks = tasks.filter((item) => item.priority === priority);
+  }
+
+  // Oluşturulma tarihine göre sıralama (?sort=createdAt)
+  if (sort === 'createdAt') {
+    tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  }
+
+  // Sayfalama işlemi (?page=1&limit=10)
+  if (page && limit) {
+    const pageNumber = Number(page);
+    const limitNumber = Number(limit);
+    const startIndex = (pageNumber - 1) * limitNumber;
+    const endIndex = startIndex + limitNumber;
+
+    tasks = tasks.slice(startIndex, endIndex);
+  }
 
   res.status(200).json({
     success: true,
     count: tasks.length,
     data: tasks
+  });
+};
+
+// Anahtar kelimeye göre görev arama (GET /tasks/search?keyword=backend)
+const searchTasks = (req, res) => {
+  const tasks = readTasks();
+  const { keyword } = req.query;
+
+  if (!keyword) {
+    return res.status(400).json({
+      success: false,
+      message: 'Arama yapmak için keyword parametresi göndermelisiniz.'
+    });
+  }
+
+  const lowerKeyword = keyword.toLowerCase();
+
+  // Başlıkta veya açıklamada aranan kelime geçiyorsa listeye dahil et
+  const matchedTasks = tasks.filter(
+    (item) =>
+      item.title.toLowerCase().includes(lowerKeyword) ||
+      item.description.toLowerCase().includes(lowerKeyword)
+  );
+
+  res.status(200).json({
+    success: true,
+    count: matchedTasks.length,
+    data: matchedTasks
+  });
+};
+
+// Kullanıcıya (atanan kişiye) göre görevleri listele (GET /tasks/assignee/:name)
+const getTasksByAssignee = (req, res) => {
+  const tasks = readTasks();
+  const assigneeName = req.params.name.toLowerCase();
+
+  const userTasks = tasks.filter(
+    (item) => item.assignee.toLowerCase() === assigneeName
+  );
+
+  res.status(200).json({
+    success: true,
+    count: userTasks.length,
+    data: userTasks
   });
 };
 
@@ -135,6 +205,8 @@ const deleteTask = (req, res) => {
 
 module.exports = {
   getAllTasks,
+  searchTasks,
+  getTasksByAssignee,
   getTaskById,
   createTask,
   updateTask,

@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('./middlewares/logger');
 const taskRoutes = require('./routes/taskRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -21,6 +22,9 @@ app.get('/', (req, res) => {
 
 // Görev yönetim rotaları
 app.use('/tasks', taskRoutes);
+
+// Raporlama rotaları
+app.use('/reports', reportRoutes);
 
 // Tanımsız bir adrese istek atıldığında dönecek 404 yanıtı
 app.use((req, res) => {
