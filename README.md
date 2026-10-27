@@ -20,20 +20,21 @@ Node.js ve Express.js kullanılarak geliştirilmiş, ekip içi görevlerin oluş
 ```text
 taskflow-api/
 ├── controllers/
-│   ├── taskController.js      # Görev CRUD, filtreleme ve arama işlemleri
-│   └── reportController.js    # İstatistik ve raporlama işlemleri
+│   ├── taskController.js               # Görev CRUD, filtreleme ve arama işlemleri
+│   └── reportController.js             # İstatistik ve raporlama işlemleri
 ├── data/
-│   └── tasks.json             # Görev verilerinin tutulduğu JSON dosyası
+│   └── tasks.json                      # Görev verilerinin tutulduğu JSON dosyası
 ├── middlewares/
-│   ├── logger.js              # İstekleri konsola ve dosyaya kaydeden middleware
-│   └── validateTask.js        # Görev verilerini doğrulayan middleware
+│   ├── logger.js                       # İstekleri konsola ve dosyaya kaydeden middleware
+│   └── validateTask.js                 # Görev verilerini doğrulayan middleware
 ├── routes/
-│   ├── taskRoutes.js          # /tasks uç noktası yönlendirmeleri
-│   └── reportRoutes.js        # /reports uç noktası yönlendirmeleri
-├── app.js                     # Express sunucu yapılandırması ve başlangıç dosyası
-├── package.json               # Proje bağımlılıkları ve çalışma komutları
-├── PROJE_TANITIM_DOKUMANI.md  # Proje senaryosu, veri modeli ve test dokümanı
-└── README.md                  # Kurulum ve API kullanım kılavuzu
+│   ├── taskRoutes.js                   # /tasks uç noktası yönlendirmeleri
+│   └── reportRoutes.js                 # /reports uç noktası yönlendirmeleri
+├── screenshots/                        # Postman test ekran görüntüleri
+├── app.js                              # Express sunucu yapılandırması ve başlangıç dosyası
+├── package.json                        # Proje bağımlılıkları ve çalışma komutları
+├── PROJE_TANITIM_DOKUMANI.md           # Proje senaryosu, veri modeli ve test dokümanı
+└── README.md                           # Kurulum ve API kullanım kılavuzu
 ```
 
 ---
@@ -186,3 +187,28 @@ Sunucu varsayılan olarak **`http://localhost:3000`** adresinde çalışmaya ba�
   }
 }
 ```
+
+---
+
+## Postman Test Ekran Görüntüleri
+
+### 1. Görev Listeleme (`GET /tasks`)
+![Görev Listeleme](./screenshots/1-gorev-listeleme.png)
+
+### 2. Görev Detayı (`GET /tasks/1`)
+![Görev Detayı](./screenshots/2-gorev-detayi.png)
+
+### 3. Yeni Görev Ekleme (`POST /tasks`)
+![Yeni Görev Ekleme](./screenshots/3-gorev-ekleme.png)
+
+### 4. Görev Güncelleme (`PUT /tasks/3`)
+![Görev Güncelleme](./screenshots/4-gorev-guncelleme.png)
+
+### 5. Görev Silme (`DELETE /tasks/5`)
+![Görev Silme](./screenshots/5-gorev-silme.png)
+
+### 6. Duruma Göre Filtreleme (`GET /tasks?status=completed`)
+![Duruma Göre Filtreleme](./screenshots/6-bonus-filtreleme.png)
+
+### 7. Anahtar Kelime İle Görev Arama (`GET /tasks/search?keyword=backend`)
+![Görev Arama](./screenshots/7-bonus-arama.png)
